@@ -47,6 +47,26 @@ const migrate = async () => {
     await pool.query(`
       CREATE INDEX IF NOT EXISTS chunks_embedding_idx ON chunks USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
     `);
+    
+    // Create sessions table for chat memory
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS sessions (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        messages JSONB DEFAULT '[]',
+        context_summary TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // Create query_cache table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS query_cache (
+        cache_key TEXT PRIMARY KEY,
+        result JSONB NOT NULL,
+        expires_at TIMESTAMP NOT NULL
+      );
+    `);
 
     console.log('Migrations completed successfully.');
   } catch (error) {
