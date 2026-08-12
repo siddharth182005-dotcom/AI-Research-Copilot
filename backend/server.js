@@ -21,10 +21,12 @@ const pool = new Pool({
 import uploadRoutes from './src/routes/upload.js';
 import searchRoutes from './src/routes/search.js';
 import chatRoutes from './src/routes/chat.js';
+import papersRoutes from './src/routes/papers.js';
 
 app.use('/api/upload', uploadRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/papers', papersRoutes);
 
 // Basic health check endpoint
 app.get('/health', async (req, res) => {
