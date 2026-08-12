@@ -18,6 +18,10 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+import uploadRoutes from './src/routes/upload.js';
+
+app.use('/api/upload', uploadRoutes);
+
 // Basic health check endpoint
 app.get('/health', async (req, res) => {
   try {
