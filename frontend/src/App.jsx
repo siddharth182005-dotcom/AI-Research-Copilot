@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Upload from './pages/Upload';
 import Chat from './pages/Chat';
 import Papers from './pages/Papers';
-import { BookOpen, MessageSquare, UploadCloud } from 'lucide-react';
+import Insights from './pages/Insights';
+import { BookOpen, MessageSquare, UploadCloud, Lightbulb } from 'lucide-react';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
             <Link to="/papers" style={linkStyle}>
               <BookOpen size={20} /> Papers
             </Link>
+            <Link to="/insights" style={linkStyle}>
+              <Lightbulb size={20} /> Insights
+            </Link>
           </nav>
         </div>
 
@@ -38,6 +42,7 @@ function App() {
               <Route path="/" element={<Chat />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/papers" element={<Papers />} />
+              <Route path="/insights" element={<Insights />} />
             </Routes>
           </main>
         </div>

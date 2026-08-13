@@ -67,6 +67,17 @@ const migrate = async () => {
         expires_at TIMESTAMP NOT NULL
       );
     `);
+    
+    // Create literature_reviews table for insights
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS literature_reviews (
+        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        type TEXT NOT NULL,
+        paper_ids UUID[] NOT NULL,
+        output_json JSONB NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
 
     console.log('Migrations completed successfully.');
   } catch (error) {
